@@ -1,0 +1,20 @@
+{
+  "count": 15,
+  "code": 0,
+  "result": [
+    {
+      "aid": 2848529,
+      "lrc": "http://s.gecimi.com/lrc/344/34435/3443588.lrc",
+      "sid": 3443588,
+      "artist_id": 2,
+      "song": "\u6d77\u9614\u5929\u7a7a"
+    },
+    {
+      "aid": 2346662,
+      "lrc": "http://s.gecimi.com/lrc/274/27442/2744281.lrc",
+      "sid": 2744281,
+      "artist_id": 2396,
+      "song": "\u6d77\u9614\u5929\u7a7a"
+    }
+  ]
+}
