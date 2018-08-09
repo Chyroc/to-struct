@@ -18,7 +18,7 @@ func JSONToStruct(buf *bytes.Buffer, padding string, in []byte) {
 }
 
 func interfaceToType(buf *bytes.Buffer, padding string, s interface{}) {
-	switch  s.(type) {
+	switch  v := s.(type) {
 	case string:
 		buf.WriteString("string")
 		return
@@ -53,10 +53,10 @@ func interfaceToType(buf *bytes.Buffer, padding string, s interface{}) {
 		buf.WriteString("uint64")
 		return
 	case float32:
-		buf.WriteString("float32")
+		buf.WriteString(float32To(v))
 		return
 	case float64:
-		buf.WriteString("float64")
+		buf.WriteString(float64To(v))
 		return
 	case bool:
 		buf.WriteString("bool")

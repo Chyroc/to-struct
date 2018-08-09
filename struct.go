@@ -9,11 +9,10 @@ import (
 
 func mapToStruct(buf *bytes.Buffer, padding string, m map[string]interface{}) {
 	if padding == "" {
-		buf.WriteString(`type Struct struct {`)
+		buf.WriteString("type Struct struct {\n")
 	} else {
-		buf.WriteString(`struct {`)
+		buf.WriteString("struct {\n")
 	}
-	buf.WriteString("\n")
 	newPadding := padding + "\t"
 
 	var keys []string
@@ -28,5 +27,5 @@ func mapToStruct(buf *bytes.Buffer, padding string, m map[string]interface{}) {
 		interfaceToType(n, newPadding, m[k])
 		buf.WriteString(fmt.Sprintf(newPadding+"%s\t%s\n", strings.Title(k), n.String()))
 	}
-	buf.WriteString(padding + `}`)
+	buf.WriteString(padding + "}")
 }
