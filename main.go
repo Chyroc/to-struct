@@ -1,11 +1,11 @@
 package main
 
 import (
-	"os"
+	"bytes"
+	"fmt"
 	"io/ioutil"
 	"log"
-	"fmt"
-	"bytes"
+	"os"
 )
 
 func main() {
@@ -16,7 +16,10 @@ func main() {
 
 	var buf = new(bytes.Buffer)
 
+	// map slice
 	JSONToStruct(buf, "", in)
+	if s := buf.String(); s != "" {
+		fmt.Println(s)
+	}
 
-	fmt.Println(buf.String())
 }

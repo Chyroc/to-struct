@@ -1,24 +1,28 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"reflect"
-	"bytes"
 )
 
 func JSONToStruct(buf *bytes.Buffer, padding string, in []byte) {
-	var m = make(map[string]interface{})
-
-	if err := json.Unmarshal(in, &m); err != nil {
+	var m1 = make(map[string]interface{})
+	if err := json.Unmarshal(in, &m1); err == nil {
+		mapToStruct(buf, padding, m1)
 		return
 	}
 
-	mapToStruct(buf, padding, m)
+	var m2 []interface{}
+	if err := json.Unmarshal(in, &m2); err == nil {
+		sliceToStruct(buf, padding, m2)
+		return
+	}
 }
 
 func interfaceToType(buf *bytes.Buffer, padding string, s interface{}) {
-	switch  v := s.(type) {
+	switch v := s.(type) {
 	case string:
 		buf.WriteString("string")
 		return

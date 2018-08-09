@@ -1,8 +1,8 @@
 package main
 
 import (
-	"strconv"
 	"fmt"
+	"strconv"
 )
 
 func float32To(f float32) string {
