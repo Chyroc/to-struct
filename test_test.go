@@ -1,24 +1,20 @@
 package main
 
 import (
-	"bytes"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 )
 
-func testJSON(t *testing.T, path, expected string) {
+func testToStruct(t *testing.T, path, expected string) {
 	in, err := ioutil.ReadFile(path)
 	assert.Nil(t, err)
-
-	var buf = new(bytes.Buffer)
-	JSONToStruct(buf, "", []byte(in))
-	assert.Equal(t, expected, buf.String())
+	assert.Equal(t, expected, toStruct(in))
 }
 
 func TestJSONToStruct(t *testing.T) {
-	testJSON(t, "./testdata/map_1.json", `type Struct struct {
+	testToStruct(t, "./testdata/map_1.json", `type Struct struct {
 	Code	int
 	Count	int
 	Result	[]struct {
@@ -30,7 +26,7 @@ func TestJSONToStruct(t *testing.T) {
 	}
 }`)
 
-	testJSON(t, "./testdata/slice_1.json", `type Struct struct {
+	testToStruct(t, "./testdata/slice_1.json", `type Struct struct {
 	Slice	[]struct {
 		Aid	int
 		ArtistID	int
@@ -42,5 +38,31 @@ func TestJSONToStruct(t *testing.T) {
 }
 
 func TestTomlTo(t *testing.T) {
-	
+	testToStruct(t, "./testdata/toml_1.toml", `type Struct struct {
+	Clients	struct {
+		Data	[][]string
+		Hosts	[]string
+	}
+	Database	struct {
+		ConnectionMax	int64
+		Enabled	bool
+		Ports	[]int64
+		Server	string
+	}
+	Owner	struct {
+		Dob	time.Time
+		Name	string
+	}
+	Servers	struct {
+		Alpha	struct {
+			Dc	string
+			IP	string
+		}
+		Beta	struct {
+			Dc	string
+			IP	string
+		}
+	}
+	Title	string
+}`)
 }

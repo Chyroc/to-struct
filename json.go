@@ -70,6 +70,12 @@ func interfaceToType(buf *bytes.Buffer, padding string, s interface{}) {
 	vt := reflect.TypeOf(s)
 	vv := reflect.ValueOf(s)
 	switch vt.Kind() {
+	case reflect.Struct:
+		buf.WriteString(vt.String())
+		return
+		fmt.Printf("%#v\n", vv.Interface())
+		fmt.Printf("%#v\n", vt.Name())
+		fmt.Printf("%#v\n", vt.String())
 	case reflect.Slice:
 		buf.WriteString("[]")
 		interfaceToType(buf, padding, vv.Index(0).Interface())
